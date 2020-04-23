@@ -93,6 +93,7 @@ export default class LightPaint {
       y: object.startPoint.y,
       endX: object.endPoint.x,
       endY: object.endPoint.y,
+      strokeWidth: object.strokeWidth,
       color: object.color
     };
   }
