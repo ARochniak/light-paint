@@ -31,7 +31,11 @@ export default class LightPaint {
   }
 
   draw(x, y) {
+    if (!this.state.isDrawing) return false;
     this.state.setEndPoint(x, y);
+    if (this.state.mustRedraw()) {
+      this.redraw();
+    }
     this.tools[this.state.activeDrawingTool]();
   }
 
@@ -42,48 +46,25 @@ export default class LightPaint {
   }
 
   drawCurve() {
-    if (!this.state.isDrawing) return false;
     const { x, y } = this.state.endPoint;
     const color = this.state.color;
     this.drawer.drawPoint(x, y, color);
     this.state.addCurvePoint(x, y);
   }
 
-  drawRect({
-    x = this.state.startPoint.x,
-    y = this.state.startPoint.y,
-    endX = this.state.endPoint.x,
-    endY = this.state.endPoint.y,
-    color = this.state.color
-  } = {}) {
-    if (!this.state.isDrawing) return false;
-    if (!this.state.isRedraw) {
-      this.drawer.clearCanvas();
-      this.redraw();
-    }
+  drawRect(drawingParameters = this.state.getDrawingParameters()) {
+    let { x, y, endX, endY, color } = drawingParameters;
     const width = endX - x;
     const height = endY - y;
     this.drawer.drawReact({ x, y, width, height, color });
   }
 
-  drawArrow({
-    x = this.state.startPoint.x,
-    y = this.state.startPoint.y,
-    endX = this.state.endPoint.x,
-    endY = this.state.endPoint.y,
-    color = this.state.color
-  } = {}) {
-    if (!this.state.isDrawing) return false;
-    if (!this.state.isRedraw) {
-      this.drawer.clearCanvas();
-      this.redraw();
-    }
-    this.drawer.drawArrow({ x, y, endX, endY, color });
+  drawArrow(drawingParameters = this.state.getDrawingParameters()) {
+    this.drawer.drawArrow(drawingParameters);
   }
 
   redraw() {
     this.drawer.clearCanvas();
-    if (!this.state.savedObjects) return false;
     this.state.startRedraw();
     this.state.savedObjects.forEach(object => {
       // TODO лишняя установка endPoint
@@ -93,22 +74,26 @@ export default class LightPaint {
         });
         this.drawer.endDrawing();
       } else {
-        this.tools[object.drawingTool]({
-          x: object.startPoint.x,
-          y: object.startPoint.y,
-          endX: object.endPoint.x,
-          endY: object.endPoint.y,
-          color: object.color
-        });
+        const drawingParameters = this.getObjectDrawingParameters(object);
+        this.tools[object.drawingTool](drawingParameters);
       }
     });
     this.state.stopRedraw();
   }
 
+  getObjectDrawingParameters(object) {
+    return {
+      x: object.startPoint.x,
+      y: object.startPoint.y,
+      endX: object.endPoint.x,
+      endY: object.endPoint.y,
+      color: object.color
+    }
+  }
+
   saveObject(endPoint) {
     if (this.state.activeDrawingTool === 'pencil') {
       this.state.saveCurve();
-      // this.drawer.endDrawing();
     } else {
       this.state.saveShape(endPoint);
     }

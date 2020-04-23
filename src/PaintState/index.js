@@ -3,18 +3,34 @@ export default class PaintState {
     this.savedObjects = [];
     this.curvePoints = [];
     this.startPoint = { x: 0, y: 0 };
-    this.endPoint = {x: 0, y: 0};
+    this.endPoint = { x: 0, y: 0 };
     this.activeDrawingTool = 'pencil';
     this.color = 'black';
     this.isDrawing = false;
     this.isRedraw = false;
   }
 
+  getDrawingParameters() {
+    return {
+      x: this.startPoint.x,
+      y: this.startPoint.y,
+      endX: this.endPoint.x,
+      endY: this.endPoint.y,
+      color: this.color
+    };
+  }
+
+  mustRedraw() {
+    return (
+      !this.isRedraw && this.activeDrawingTool !== 'pencil' && this.savedObjects
+    );
+  }
+
   clearState() {
     this.savedObjects = [];
     this.curvePoints = [];
     this.startPoint = { x: 0, y: 0 };
-    this.endPoint = {x: 0, y: 0};
+    this.endPoint = { x: 0, y: 0 };
   }
 
   saveShape(endPoint) {
@@ -49,7 +65,7 @@ export default class PaintState {
   }
 
   startRedraw() {
-    this.isRedraw = true
+    this.isRedraw = true;
   }
 
   stopRedraw() {

@@ -21,6 +21,7 @@ body {
   padding: 8px;
 
   background: linear-gradient(to right, #b0bdf6, #bdc8ec);
+  box-shadow: 0 0 5px #5555ff;
 }
 
 .paint__canvas {
