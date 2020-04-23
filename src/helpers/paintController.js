@@ -17,9 +17,9 @@ const paintController = (paint, canvas) => {
     const color = e.target.value;
     paint.setColor(color);
   };
-  document.querySelector('.paint__stroke-width').onchange = e => {
-    const strokeWidth = e.target.value;
-    paint.setStrokeWidth(strokeWidth);
+  document.querySelector('.paint__line-width').onchange = e => {
+    const lineWidth = e.target.value;
+    paint.setLineWidth(lineWidth);
   };
   document.querySelector('.paint__clear').onclick = () => {
     paint.clear();

@@ -48,16 +48,16 @@ export default class LightPaint {
   drawCurve() {
     const { x, y } = this.state.endPoint;
     const color = this.state.color;
-    const strokeWidth = this.state.strokeWidth;
-    this.drawer.drawPoint(x, y, color, strokeWidth);
+    const lineWidth = this.state.lineWidth;
+    this.drawer.drawPoint(x, y, color, lineWidth);
     this.state.addCurvePoint(x, y);
   }
 
   drawRect(drawingParameters = this.state.getDrawingParameters()) {
-    let { x, y, endX, endY, color, strokeWidth } = drawingParameters;
+    let { x, y, endX, endY, color, lineWidth } = drawingParameters;
     const width = endX - x;
     const height = endY - y;
-    this.drawer.drawReact({ x, y, width, height, color, strokeWidth });
+    this.drawer.drawReact({ x, y, width, height, color, lineWidth });
   }
 
   drawArrow(drawingParameters = this.state.getDrawingParameters()) {
@@ -75,7 +75,7 @@ export default class LightPaint {
             curvePoint.x,
             curvePoint.y,
             object.color,
-            object.strokeWidth
+            object.lineWidth
           );
         });
         this.drawer.endDrawing();
@@ -93,7 +93,7 @@ export default class LightPaint {
       y: object.startPoint.y,
       endX: object.endPoint.x,
       endY: object.endPoint.y,
-      strokeWidth: object.strokeWidth,
+      lineWidth: object.lineWidth,
       color: object.color
     };
   }
@@ -121,7 +121,7 @@ export default class LightPaint {
   setColor(color) {
     this.state.setColor(color);
   }
-  setStrokeWidth(width) {
-    this.state.setStrokeWidth(width);
+  setLineWidth(width) {
+    this.state.setLineWidth(width);
   }
 }
