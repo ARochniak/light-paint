@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+
+  user-select: none;
+}
+
+.paint {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 20px;
+}
+
+.paint__toolbar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: space-between;
+  margin-right: 20px;
+
+  background: linear-gradient(to right, #8791bf, #95a3d1);
+}
+
+.paint__canvas {
+  flex-grow: 1;
+  flex-shrink: 0;
+
+  border: 1px solid;
+
+
+  box-shadow: 0 0 6px #95a3d1;
+}
+
+.paint__canvas:hover {
+  cursor: url("images/pencil.cur"), auto;
+}
+
+.paint__drawing-tools,
+.paint__editing-tools {
+  display: flex;
+  flex-direction: column;
+}

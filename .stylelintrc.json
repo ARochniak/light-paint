@@ -1,12 +1,13 @@
 {
   "extends": [
-    "stylelint-config-htmlacademy",
-    "stylelint-config-rational-order"
-    ],
+  "stylelint-config-htmlacademy",
+  "stylelint-config-rational-order"
+  ],
   "rules": {
     "plugin/rational-order": [true, {
       "border-in-box-model": false,
       "empty-line-between-groups": true
-    }]
-  }
+      }]
+  },
+  "ignoreFiles": "node_modules/**"
 }
