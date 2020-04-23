@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawing app</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <div class="paint">
+      <aside class="paint__toolbar">
+        <div class="paint__drawing-tools">
+          <button class="paint__rect paint__button">Rectangle</button>
+          <button class="paint__pencil paint__button">Pencil</button>
+          <button class="paint__arrow paint__button">Arrow</button>
+          <input type="color" class="paint__color paint__button" />
+        </div>
+        <div class="paint__editing-tools">
+          <button class="paint__clear paint__button">Clear</button>
+          <button class="paint__save paint__button">Save</button>
+          <button class="paint__load paint__button">Load</button>
+        </div>
+      </aside>
+      <canvas class="paint__canvas"></canvas>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
