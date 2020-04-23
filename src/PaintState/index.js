@@ -6,6 +6,7 @@ export default class PaintState {
     this.endPoint = { x: 0, y: 0 };
     this.activeDrawingTool = 'pencil';
     this.color = 'black';
+    this.strokeWidth = 1;
     this.isDrawing = false;
     this.isRedraw = false;
   }
@@ -16,7 +17,8 @@ export default class PaintState {
       y: this.startPoint.y,
       endX: this.endPoint.x,
       endY: this.endPoint.y,
-      color: this.color
+      color: this.color,
+      strokeWidth: this.strokeWidth
     };
   }
 
@@ -38,6 +40,7 @@ export default class PaintState {
       startPoint: { ...this.startPoint },
       endPoint,
       color: this.color,
+      strokeWidth: this.strokeWidth,
       drawingTool: this.activeDrawingTool
     });
   }
@@ -46,6 +49,7 @@ export default class PaintState {
     this.savedObjects.push({
       curvePoints: [...this.curvePoints],
       color: this.color,
+      strokeWidth: this.strokeWidth,
       drawingTool: this.activeDrawingTool
     });
     this.curvePoints = [];
@@ -82,6 +86,10 @@ export default class PaintState {
 
   setColor(color) {
     this.color = color;
+  }
+
+  setStrokeWidth(width) {
+    this.strokeWidth = width;
   }
 
   setActiveDrawingTool(tool) {

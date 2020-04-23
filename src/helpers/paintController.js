@@ -17,6 +17,10 @@ const paintController = (paint, canvas) => {
     const color = e.target.value;
     paint.setColor(color);
   };
+  document.querySelector('.paint__stroke-width').onchange = e => {
+    const strokeWidth = e.target.value;
+    paint.setStrokeWidth(strokeWidth);
+  };
   document.querySelector('.paint__clear').onclick = () => {
     paint.clear();
   };
@@ -29,11 +33,11 @@ const paintController = (paint, canvas) => {
   canvas.addEventListener('mousedown', e => {
     const coords = getRelativeCoords(canvas, e.clientX, e.clientY);
     paint.state.startDrawing(coords.x, coords.y);
+    paint.draw(coords.x, coords.y);
   });
 
   canvas.addEventListener('mousemove', e => {
     const coords = getRelativeCoords(canvas, e.clientX, e.clientY);
-
     paint.draw(coords.x, coords.y);
   });
 

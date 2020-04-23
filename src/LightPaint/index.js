@@ -48,15 +48,16 @@ export default class LightPaint {
   drawCurve() {
     const { x, y } = this.state.endPoint;
     const color = this.state.color;
-    this.drawer.drawPoint(x, y, color);
+    const strokeWidth = this.state.strokeWidth;
+    this.drawer.drawPoint(x, y, color, strokeWidth);
     this.state.addCurvePoint(x, y);
   }
 
   drawRect(drawingParameters = this.state.getDrawingParameters()) {
-    let { x, y, endX, endY, color } = drawingParameters;
+    let { x, y, endX, endY, color, strokeWidth } = drawingParameters;
     const width = endX - x;
     const height = endY - y;
-    this.drawer.drawReact({ x, y, width, height, color });
+    this.drawer.drawReact({ x, y, width, height, color, strokeWidth });
   }
 
   drawArrow(drawingParameters = this.state.getDrawingParameters()) {
@@ -70,7 +71,12 @@ export default class LightPaint {
       // TODO лишняя установка endPoint
       if (object.drawingTool === 'pencil') {
         object.curvePoints.forEach(curvePoint => {
-          this.drawer.drawPoint(curvePoint.x, curvePoint.y, object.color);
+          this.drawer.drawPoint(
+            curvePoint.x,
+            curvePoint.y,
+            object.color,
+            object.strokeWidth
+          );
         });
         this.drawer.endDrawing();
       } else {
@@ -88,7 +94,7 @@ export default class LightPaint {
       endX: object.endPoint.x,
       endY: object.endPoint.y,
       color: object.color
-    }
+    };
   }
 
   saveObject(endPoint) {
@@ -113,5 +119,8 @@ export default class LightPaint {
 
   setColor(color) {
     this.state.setColor(color);
+  }
+  setStrokeWidth(width) {
+    this.state.setStrokeWidth(width);
   }
 }

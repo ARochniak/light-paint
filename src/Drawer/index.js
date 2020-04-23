@@ -8,10 +8,11 @@ export default class Drawer {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  drawPoint(x, y, color) {
+  drawPoint(x, y, color, strokeWidth) {
     const ctx = this.ctx;
     ctx.lineCap = 'round';
     ctx.strokeStyle = color;
+    ctx.lineWidth = strokeWidth;
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
@@ -22,20 +23,22 @@ export default class Drawer {
     this.ctx.beginPath();
   }
 
-  drawReact({ x, y, width, height, color }) {
+  drawReact({ x, y, width, height, color, strokeWidth }) {
     this.setColor(color);
     this.ctx.beginPath();
+    this.ctx.strokeStyle = 'black';
+    this.ctx.lineWidth = strokeWidth;
     this.ctx.fillRect(x, y, width, height);
     this.ctx.rect(x, y, width, height);
     //TODO add support of select rectangle border
-    this.ctx.strokeStyle = 'black';
     this.ctx.stroke();
     this.ctx.beginPath();
   }
 
-  drawArrow({x, y, endX, endY, color}) {
+  drawArrow({x, y, endX, endY, color, strokeWidth}) {
     this.ctx.beginPath();
     this.ctx.strokeStyle = color;
+    this.ctx.lineWidth = strokeWidth;
     const arrowheadLength = 10;
     const dx = endX - x;
     const dy = endY - y;
