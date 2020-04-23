@@ -18,8 +18,9 @@ body {
   flex-shrink: 0;
   justify-content: space-between;
   margin-right: 20px;
+  padding: 8px;
 
-  background: linear-gradient(to right, #8791bf, #95a3d1);
+  background: linear-gradient(to right, #b0bdf6, #bdc8ec);
 }
 
 .paint__canvas {
@@ -41,3 +42,28 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.paint__toolbar button {
+  box-sizing: border-box;
+  padding: 6px;
+
+  font-size: 1em;
+  font-family: cursive;
+
+  background: lavender;
+  border: none;
+}
+
+.paint__toolbar button:hover {
+  outline: 1px solid;
+  cursor: pointer;
+}
+
+.paint__drawing-tools button:not(:first-child) {
+  margin-top: 10px;
+}
+
+.paint__editing-tools button:not(:first-child) {
+  margin-top: 10px;
+}
+
