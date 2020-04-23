@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "globals": {
+    "Atomics": false,
+    "SharedArrayBuffer": false,
+    "module": true,
+    "require": true,
+    "__dirname": true,
+    "fetch": false
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier"],
+  "rules": {
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-return-assign": ["error", "except-parens"],
+    "no-unused-vars": ["off", { "vars": "all", "args": "after-used" }],
+    "prettier/prettier": "error",
+  }
+}
