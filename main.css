@@ -20,7 +20,10 @@ body {
   margin-right: 20px;
   padding: 8px;
 
+  font-family: cursive;
+
   background: linear-gradient(to right, #b0bdf6, #bdc8ec);
+  box-shadow: 0 0 5px #5555ff;
 }
 
 .paint__canvas {
@@ -48,7 +51,7 @@ body {
   padding: 6px;
 
   font-size: 1em;
-  font-family: cursive;
+  font-family: inherit;
 
   background: lavender;
   border: none;
@@ -62,6 +65,12 @@ body {
 .paint__color {
   margin-right: auto;
   margin-left: auto;
+  padding: 1px !important;
+}
+
+.paint__stroke-width {
+  width: 3em;
+  margin-top: 10px;
   padding: 1px !important;
 }
 
