@@ -68,7 +68,6 @@ export default class LightPaint {
     this.drawer.clearCanvas();
     this.state.startRedraw();
     this.state.savedObjects.forEach(object => {
-      // TODO лишняя установка endPoint
       if (object.drawingTool === 'pencil') {
         object.curvePoints.forEach(curvePoint => {
           this.drawer.drawPoint(
@@ -104,6 +103,14 @@ export default class LightPaint {
     } else {
       this.state.saveShape(endPoint);
     }
+  }
+
+  startDrawing(x, y) {
+    this.state.startDrawing(x, y);
+  }
+
+  shouldStopDrawing() {
+    return this.state.isDrawing;
   }
 
   setPencil() {

@@ -1,9 +1,6 @@
 import getRelativeCoords from './getRelativeCoords';
 
-const paintController = (paint, canvas) => {
-  document.onselect = () => {
-    return false;
-  };
+const setDrawingToolsHandlers = paint => {
   document.querySelector('.paint__rect').onclick = () => {
     paint.setRect();
   };
@@ -21,6 +18,9 @@ const paintController = (paint, canvas) => {
     const lineWidth = e.target.value;
     paint.setLineWidth(lineWidth);
   };
+};
+
+const setEditingToolsHandlers = paint => {
   document.querySelector('.paint__clear').onclick = () => {
     paint.clear();
   };
@@ -30,9 +30,12 @@ const paintController = (paint, canvas) => {
   document.querySelector('.paint__load').onclick = () => {
     paint.loadFromLocal();
   };
+};
+
+const setCanvasInteraction = (canvas, paint) => {
   canvas.addEventListener('mousedown', e => {
     const coords = getRelativeCoords(canvas, e.clientX, e.clientY);
-    paint.state.startDrawing(coords.x, coords.y);
+    paint.startDrawing(coords.x, coords.y);
     paint.draw(coords.x, coords.y);
   });
 
@@ -43,8 +46,19 @@ const paintController = (paint, canvas) => {
 
   document.addEventListener('mouseup', e => {
     const coords = getRelativeCoords(canvas, e.clientX, e.clientY);
-    if (paint.state.isDrawing) paint.stopDrawing({ x: coords.x, y: coords.y });
+    if (paint.shouldStopDrawing())
+      paint.stopDrawing({ x: coords.x, y: coords.y });
   });
+};
+
+const paintController = (paint, canvas) => {
+  document.onselect = () => {
+    return false;
+  };
+
+  setDrawingToolsHandlers(paint);
+  setEditingToolsHandlers(paint);
+  setCanvasInteraction(canvas, paint);
 };
 
 export default paintController;
