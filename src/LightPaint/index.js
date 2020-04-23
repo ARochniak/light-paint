@@ -14,7 +14,6 @@ export default class LightPaint {
     };
   }
 
-
   clear() {
     this.drawer.clearCanvas();
     this.state.clearState();
@@ -31,18 +30,6 @@ export default class LightPaint {
     this.state.isDrawing = false;
   }
 
-  setPencil() {
-    this.state.setActiveDrawingTool('pencil');
-  }
-
-  setRect() {
-    this.state.setActiveDrawingTool('rect');
-  }
-
-  setArrow() {
-    this.state.setActiveDrawingTool('arrow');
-  }
-
   draw(x, y) {
     this.state.setEndPoint(x, y);
     this.tools[this.state.activeDrawingTool]();
@@ -57,7 +44,8 @@ export default class LightPaint {
   drawCurve() {
     if (!this.state.isDrawing) return false;
     const { x, y } = this.state.endPoint;
-    this.drawer.drawPoint(x, y);
+    const color = this.state.color;
+    this.drawer.drawPoint(x, y, color);
     this.state.addCurvePoint(x, y);
   }
 
@@ -65,7 +53,8 @@ export default class LightPaint {
     x = this.state.startPoint.x,
     y = this.state.startPoint.y,
     endX = this.state.endPoint.x,
-    endY = this.state.endPoint.y
+    endY = this.state.endPoint.y,
+    color = this.state.color
   } = {}) {
     if (!this.state.isDrawing) return false;
     if (!this.state.isRedraw) {
@@ -74,21 +63,22 @@ export default class LightPaint {
     }
     const width = endX - x;
     const height = endY - y;
-    this.drawer.drawReact({ x, y, width, height });
+    this.drawer.drawReact({ x, y, width, height, color });
   }
 
   drawArrow({
     x = this.state.startPoint.x,
     y = this.state.startPoint.y,
     endX = this.state.endPoint.x,
-    endY = this.state.endPoint.y
+    endY = this.state.endPoint.y,
+    color = this.state.color
   } = {}) {
     if (!this.state.isDrawing) return false;
     if (!this.state.isRedraw) {
       this.drawer.clearCanvas();
       this.redraw();
     }
-    this.drawer.drawArrow({ x, y, endX, endY });
+    this.drawer.drawArrow({ x, y, endX, endY, color });
   }
 
   redraw() {
@@ -99,7 +89,7 @@ export default class LightPaint {
       // TODO лишняя установка endPoint
       if (object.drawingTool === 'pencil') {
         object.curvePoints.forEach(curvePoint => {
-          this.drawer.drawPoint(curvePoint.x, curvePoint.y);
+          this.drawer.drawPoint(curvePoint.x, curvePoint.y, object.color);
         });
         this.drawer.endDrawing();
       } else {
@@ -107,7 +97,8 @@ export default class LightPaint {
           x: object.startPoint.x,
           y: object.startPoint.y,
           endX: object.endPoint.x,
-          endY: object.endPoint.y
+          endY: object.endPoint.y,
+          color: object.color
         });
       }
     });
@@ -121,5 +112,21 @@ export default class LightPaint {
     } else {
       this.state.saveShape(endPoint);
     }
+  }
+
+  setPencil() {
+    this.state.setActiveDrawingTool('pencil');
+  }
+
+  setRect() {
+    this.state.setActiveDrawingTool('rect');
+  }
+
+  setArrow() {
+    this.state.setActiveDrawingTool('arrow');
+  }
+
+  setColor(color) {
+    this.state.setColor(color);
   }
 }

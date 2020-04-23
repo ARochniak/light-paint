@@ -43,7 +43,7 @@ body {
   flex-direction: column;
 }
 
-.paint__toolbar button {
+.paint__toolbar .paint__button {
   box-sizing: border-box;
   padding: 6px;
 
@@ -54,16 +54,22 @@ body {
   border: none;
 }
 
-.paint__toolbar button:hover {
+.paint__toolbar .paint__button:hover {
   outline: 1px solid;
   cursor: pointer;
 }
 
-.paint__drawing-tools button:not(:first-child) {
+.paint__color {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 1px !important;
+}
+
+.paint__drawing-tools > .paint__button:not(:first-child) {
   margin-top: 10px;
 }
 
-.paint__editing-tools button:not(:first-child) {
+.paint__editing-tools > .paint__button:not(:first-child) {
   margin-top: 10px;
 }
 

@@ -8,10 +8,10 @@ export default class Drawer {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  drawPoint(x, y) {
+  drawPoint(x, y, color) {
     const ctx = this.ctx;
     ctx.lineCap = 'round';
-
+    ctx.strokeStyle = color;
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
@@ -25,6 +25,8 @@ export default class Drawer {
   drawReact({ x, y, width, height, color }) {
     this.setColor(color);
     this.ctx.beginPath();
+    //TODO add support of select rectangle border
+    this.ctx.strokeFill = 'black';
     this.ctx.rect(x, y, width, height);
     this.ctx.fillRect(x, y, width, height);
     this.ctx.stroke();

@@ -1,6 +1,4 @@
-const setCanvasSize = () => {
-  const canvas = document.querySelector('.paint__canvas');
-
+const setCanvasSize = canvas => {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 };

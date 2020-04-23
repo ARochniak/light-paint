@@ -1,12 +1,12 @@
 export default class PaintState {
   constructor() {
-    this.isDrawing = false;
     this.savedObjects = [];
     this.curvePoints = [];
     this.startPoint = { x: 0, y: 0 };
     this.endPoint = {x: 0, y: 0};
-    this.color = 'black';
     this.activeDrawingTool = 'pencil';
+    this.color = 'black';
+    this.isDrawing = false;
     this.isRedraw = false;
   }
 
@@ -15,15 +15,6 @@ export default class PaintState {
     this.curvePoints = [];
     this.startPoint = { x: 0, y: 0 };
     this.endPoint = {x: 0, y: 0};
-  }
-
-  startDrawing(x, y) {
-    this.isDrawing = true;
-    this.setStartPoint(x, y);
-  }
-
-  stopDrawing() {
-    this.isDrawing = false;
   }
 
   saveShape(endPoint) {
@@ -46,6 +37,15 @@ export default class PaintState {
 
   addCurvePoint(x, y) {
     this.curvePoints.push({ x, y });
+  }
+
+  startDrawing(x, y) {
+    this.isDrawing = true;
+    this.setStartPoint(x, y);
+  }
+
+  stopDrawing() {
+    this.isDrawing = false;
   }
 
   startRedraw() {
