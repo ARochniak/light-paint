@@ -42,7 +42,7 @@ export default class Drawer {
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
-    const arrowheadLength = 10;
+    const arrowheadLength = lineWidth * 10;
     const dx = endX - x;
     const dy = endY - y;
     const angle = Math.atan2(dy, dx);
