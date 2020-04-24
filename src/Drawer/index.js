@@ -40,6 +40,7 @@ export default class Drawer {
     //TODO add support of selecting arrowHeadLength
     const ctx = this.ctx;
     ctx.beginPath();
+    ctx.lineCap = 'round';
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     const arrowheadLength = lineWidth * 10;
