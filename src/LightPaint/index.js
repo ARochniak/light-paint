@@ -113,15 +113,15 @@ export default class LightPaint {
     return this.state.isDrawing;
   }
 
-  setPencil() {
+  usePencil() {
     this.state.setActiveDrawingTool('pencil');
   }
 
-  setRect() {
+  useRect() {
     this.state.setActiveDrawingTool('rect');
   }
 
-  setArrow() {
+  useArrow() {
     this.state.setActiveDrawingTool('arrow');
   }
 

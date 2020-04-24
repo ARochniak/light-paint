@@ -2,13 +2,13 @@ import getRelativeCoords from './getRelativeCoords';
 
 const setDrawingToolsHandlers = paint => {
   document.querySelector('.paint__rect').onclick = () => {
-    paint.setRect();
+    paint.useRect();
   };
   document.querySelector('.paint__arrow').onclick = () => {
-    paint.setArrow();
+    paint.useArrow();
   };
   document.querySelector('.paint__pencil').onclick = () => {
-    paint.setPencil();
+    paint.usePencil();
   };
   document.querySelector('.paint__color').onchange = e => {
     const color = e.target.value;
